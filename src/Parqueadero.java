@@ -338,4 +338,51 @@ public class Parqueadero {
         return "respuesta 2";
     }
 
+
+    public double darTiempoPromedio( ) {
+        int contador=0;
+        int suma = 0;
+        for (int i = 0; i < puestos.length; i++) {
+            var puesto = puestos[i];
+            if (puesto.estaOcupado()) {
+                contador++;
+                int tiempo_auto = puesto.darCarro().darTiempoEnParqueadero(20);
+                suma += tiempo_auto;
+            }
+        }
+
+    double promedio=suma/contador;
+    return promedio;
+
+    }
+
+
+    public Carro DevuelveCarroMayorTiempo() {
+    int hora_salida =20;
+    Carro carro_temp = new Carro( "",  25);
+
+        for (int i = 0; i < puestos.length; i++) {
+            var puesto = puestos[i];
+            if (puesto.estaOcupado()) {
+                if(puesto.darCarro().darTiempoEnParqueadero(hora_salida) > carro_temp.darTiempoEnParqueadero(hora_salida)) {
+                    carro_temp = puesto.darCarro();
+                }
+            }
+        }
+
+    return carro_temp;
+}
+
+    public boolean hayCarroMasDeOchoHoras() {
+        int hora_salida = 8;
+        for (var puesto : puestos) {
+            if (puesto.estaOcupado()) {
+                if (puesto.darCarro().darTiempoEnParqueadero(hora_salida) > 8) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }
