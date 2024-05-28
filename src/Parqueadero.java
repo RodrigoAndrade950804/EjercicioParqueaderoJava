@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Esta clase representa un parqueadero con TAMANO puestos.
  */
@@ -385,4 +387,17 @@ public class Parqueadero {
 
         return false;
     }
+
+    public ArrayList<Carro> darCarrosMasDeTresHorasParqueados( ) {
+        ArrayList<Carro> carrosMasDeTresHoras = new ArrayList<Carro>();
+        for (var puesto : puestos) {
+            if (puesto.estaOcupado()) {
+                if (puesto.darCarro().darTiempoEnParqueadero(20) > 3) {
+                    carrosMasDeTresHoras.add(puesto.darCarro());
+                }
+            }
+        }
+        return carrosMasDeTresHoras;
+    }
 }
+
